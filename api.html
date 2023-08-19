@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Weather App</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="api.css">
+    </head>
+    <body>
+        <div class="container"></div>
+           <div class="card">
+             <h2><i class="fa fa-map-marker"></i><span id="location"></span></h2>
+             <h6 id="weather"></h6>
+             <h4><span id="temp"></span><sup>o</sup>C</h4>
+             <img src="" id="icon">
+             <button onclick="windows.location.reload()" class="refresh"><i class="fa fa-refresh"></i></button>
+           </div>
+        </div>
+        
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+        link="https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=5f5e35542151afb1f56df4e5b7909b9d";
+        var request= new XMLHttpRequest();
+        request.open('GET',link,true);
+        request.onload =function(){
+          var obj = JSON.parse(this.response);
+          console.log(obj);
+          document.getElementById('weather').innerHTML=obj.weather[0].description;
+          document.getElementById('location').innerHTML=obj.name;
+          document.getElementById('temp').innerHTML=Math.round(obj.main.temp -273.15);
+          document.getElementById('icon').src= "http://openweathermap.org/img/w/"+ obj.weather[0].icon+ ".png";
+        } 
+        request.send();
+        if(request.status>=200 && request.status<400){
+           var temp=obj.main.temp
+        }
+        else{
+            console.log("The city data is not available")
+        }
+        
+       
+    </script>
+</html>
